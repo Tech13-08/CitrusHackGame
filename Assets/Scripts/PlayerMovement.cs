@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     private Rigidbody2D rb => GetComponent<Rigidbody2D>();
     [SerializeField] private float speed;
-    [SerializeField] private float jumpForce;
+    [SerializeField] private float jumpForce = 9f;
     private float jumpStartTime;
     private bool startJump = false;
 
