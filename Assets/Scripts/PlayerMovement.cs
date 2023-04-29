@@ -6,6 +6,10 @@ public class PlayerMovement : MonoBehaviour
 {
     // Start is called before the first frame update
     private Rigidbody2D rb => GetComponent<Rigidbody2D>();
+
+    [SerializeField] private Transform enemyHit;
+
+    private BoxCollider2D enemyHitCollider => enemyHit.GetComponent<BoxCollider2D>();
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce = 9f;
     private float jumpStartTime;
@@ -46,6 +50,12 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = true;
         }
+
+        int enemyLayer = LayerMask.NameToLayer("Enemy");
+        if (other.gameObject.layer == enemyLayer)
+        {
+            Debug.Log("Ow");
+        }
     }
 
     void OnCollisionExit2D(Collision2D other)
@@ -54,6 +64,14 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.layer == groundLayer)
         {
             isGrounded = false;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other){
+        int enemyLayer = LayerMask.NameToLayer("Enemy");
+        if (other.gameObject.layer == enemyLayer)
+        {
+            Destroy(other.gameObject);
         }
     }
 
