@@ -7,11 +7,13 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     private Rigidbody2D rb => GetComponent<Rigidbody2D>();
     [SerializeField] private float speed;
-    [SerializeField] private float jumpForce;
+    [SerializeField] private float jumpForce = 9f;
     private float jumpStartTime;
     private bool startJump = false;
 
     private bool isGrounded = false;
+
+    [SerializeField] float scrollSpeed = 1f;
 
     private void Update(){
         if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.velocity.y) < 0.001f && isGrounded)
@@ -33,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate(){
         float horizontalInput = Input.GetAxis("Horizontal");
-        Vector2 playerVelocity = new Vector2(horizontalInput * speed, rb.velocity.y);
+        Vector2 playerVelocity = new Vector2((horizontalInput * speed) - scrollSpeed, rb.velocity.y);
         rb.velocity = playerVelocity;
     }
 
