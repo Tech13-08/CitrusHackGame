@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isGrounded = false;
 
+    [SerializeField] float scrollSpeed = 1f;
+
     private void Update(){
         if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.velocity.y) < 0.001f && isGrounded)
             {
@@ -33,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate(){
         float horizontalInput = Input.GetAxis("Horizontal");
-        Vector2 playerVelocity = new Vector2(horizontalInput * speed, rb.velocity.y);
+        Vector2 playerVelocity = new Vector2((horizontalInput * speed) - scrollSpeed, rb.velocity.y);
         rb.velocity = playerVelocity;
     }
 

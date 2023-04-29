@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Background : MonoBehaviour
 {
-    [Range(-1f, 1f)]
-    public float ScrollSpeed = 1f;
-    public float offset;
+    [SerializeField] float ScrollSpeed = 1f;
+    [SerializeField] float offset;
     private Material mat;
     // Start is called before the first frame update
     void Start()
