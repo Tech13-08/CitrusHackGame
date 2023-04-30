@@ -10,13 +10,4 @@ public class LeafMovement : MonoBehaviour
             leafRigidbody.velocity = Vector2.zero;
         }
     }
-
-    // private void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     int playerLayer = LayerMask.NameToLayer("Player");
-    //     if (collision.gameObject.layer == playerLayer)
-    //     {
-    //         Physics2D.IgnoreCollision(collision.collider, GetComponent<BoxCollider2D>());
-    //     }
-    // }
 }
