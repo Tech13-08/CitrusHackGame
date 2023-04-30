@@ -11,9 +11,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     private Rigidbody2D rb => GetComponent<Rigidbody2D>();
 
-    [SerializeField] private Transform enemyHit;
-
-    private BoxCollider2D enemyHitCollider => enemyHit.GetComponent<BoxCollider2D>();
+    [SerializeField] private BoxCollider2D enemyHitCollider;
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce = 9f;
     private float jumpStartTime;
