@@ -17,6 +17,8 @@ public class LivesManager : MonoBehaviour
 
     public TextMeshProUGUI info;
 
+    public GameEnd ge;
+
     private void FixedUpdate()
     {
         // Check if the number of images in the list is greater than the maxImages
@@ -46,7 +48,9 @@ public class LivesManager : MonoBehaviour
         if(lives > 0){
             score += 0.1f;
         }
-
-        info.text = "Score: " + Mathf.RoundToInt(score) + "\nLeaves: " + leaves;
+        else{
+            RectTransform geTransform = ge.GetComponent<RectTransform>();
+            geTransform.anchoredPosition = new Vector2(10.795f, 34);
+        }
     }
 }

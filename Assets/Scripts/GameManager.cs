@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public bool gameRun = true;
+    public bool gameRun = false;
 
     public float speed = 1f;
 

@@ -12,7 +12,7 @@ public class Background : MonoBehaviour
     void Start()
     {
         mat = GetComponent<Renderer>().material;
-        gm.gameRun = true;
+        gm.gameRun = false;
     }
 
     // Update is called once per frame

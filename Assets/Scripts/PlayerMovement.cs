@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update(){
         if(gm.gameRun){
+            animator.SetBool("dead", false);
             if (Input.GetButtonDown("Jump") && isGrounded)
             {
                 jumpStartTime = Time.time;
@@ -95,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.layer == groundLayer)
         {
             isGrounded = true;
+            lm.info.text = "";
         }
 
         int enemyLayer = LayerMask.NameToLayer("Enemy");
@@ -141,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.layer == enemyLayer)
         {
             lm.score += 100;
-            lm.info.text += "\n+100";
+            lm.info.text = "+100";
             Destroy(other.gameObject);
         }
 
