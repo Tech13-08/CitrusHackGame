@@ -10,10 +10,6 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     private Rigidbody2D rb => GetComponent<Rigidbody2D>();
 
-    public GameManager gm;
-
-    public LivesManager lm;
-
     [SerializeField] private Transform enemyHit;
 
     private BoxCollider2D enemyHitCollider => enemyHit.GetComponent<BoxCollider2D>();
