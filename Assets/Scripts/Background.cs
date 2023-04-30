@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Background : MonoBehaviour
 {
+    public GameManager gm;
     [SerializeField] float ScrollSpeed = 1f;
     [SerializeField] float offset;
     private Material mat;
@@ -16,7 +17,9 @@ public class Background : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        offset = offset + (Time.deltaTime * ScrollSpeed) / 10f;
-        mat.SetTextureOffset("_MainTex", new Vector2(offset, 0));
+        if(gm.gameRun){
+            offset = offset + (Time.deltaTime * ScrollSpeed) / 10f;
+            mat.SetTextureOffset("_MainTex", new Vector2(offset, 0));
+        }
     }
 }
