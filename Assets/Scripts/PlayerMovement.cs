@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public LivesManager lm;
     public GameManager gm;
+    public Animator animator;
 
     // Start is called before the first frame update
     private Rigidbody2D rb => GetComponent<Rigidbody2D>();
@@ -25,8 +26,6 @@ public class PlayerMovement : MonoBehaviour
     private void Update(){
         if(gm.gameRun){
             if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.velocity.y) < 0.001f && isGrounded)
-        if(gm.gameRun){
-            if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.velocity.y) < 0.001f && isGrounded)
             {
                 jumpStartTime = Time.time;
                 startJump = true;
@@ -41,18 +40,8 @@ public class PlayerMovement : MonoBehaviour
                     rb.AddForce(new Vector2(0f, newVelY), ForceMode2D.Impulse);
                 }
             }
+            animator.SetBool("jump", !isGrounded);
         }
-    }
-            if (Input.GetButtonUp("Jump") || (Time.time - jumpStartTime) > 0.6f){
-                jumpStartTime = 0f;
-                startJump = false;
-            }
-            if (startJump){
-                float newVelY = jumpForce * (0.5f* (Time.time - jumpStartTime));
-                if (rb.velocity.y <= jumpForce){
-                    rb.AddForce(new Vector2(0f, newVelY), ForceMode2D.Impulse);
-                }
-            }
         }
 
     private void FixedUpdate(){
@@ -60,10 +49,16 @@ public class PlayerMovement : MonoBehaviour
             float horizontalInput = Input.GetAxis("Horizontal");
             Vector2 playerVelocity = new Vector2((horizontalInput * speed) - scrollSpeed, rb.velocity.y);
             rb.velocity = playerVelocity;
+            animator.SetFloat("speed", horizontalInput);
+        }
+        else{
+            animator.SetFloat("speed", 0f);
         }
 
         if(lm.lives == 0){
             gm.gameRun = false;
+            animator.SetBool("dead", true);
+            rb.velocity = Vector3.zero;
         }
     }
 
