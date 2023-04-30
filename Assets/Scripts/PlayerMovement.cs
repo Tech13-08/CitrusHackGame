@@ -7,6 +7,10 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     private Rigidbody2D rb => GetComponent<Rigidbody2D>();
 
+    public GameManager gm;
+
+    public LivesManager lm;
+
     [SerializeField] private Transform enemyHit;
 
     private BoxCollider2D enemyHitCollider => enemyHit.GetComponent<BoxCollider2D>();
@@ -20,27 +24,35 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float scrollSpeed = 1f;
 
     private void Update(){
-        if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.velocity.y) < 0.001f && isGrounded)
+        if(gm.gameRun){
+            if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.velocity.y) < 0.001f && isGrounded)
             {
                 jumpStartTime = Time.time;
                 startJump = true;
             }
-        if (Input.GetButtonUp("Jump") || (Time.time - jumpStartTime) > 0.6f){
-            jumpStartTime = 0f;
-            startJump = false;
-        }
-        if (startJump){
-            float newVelY = jumpForce * (0.5f* (Time.time - jumpStartTime));
-            if (rb.velocity.y <= jumpForce){
-                rb.AddForce(new Vector2(0f, newVelY), ForceMode2D.Impulse);
+            if (Input.GetButtonUp("Jump") || (Time.time - jumpStartTime) > 0.6f){
+                jumpStartTime = 0f;
+                startJump = false;
+            }
+            if (startJump){
+                float newVelY = jumpForce * (0.5f* (Time.time - jumpStartTime));
+                if (rb.velocity.y <= jumpForce){
+                    rb.AddForce(new Vector2(0f, newVelY), ForceMode2D.Impulse);
+                }
             }
         }
     }
 
     private void FixedUpdate(){
-        float horizontalInput = Input.GetAxis("Horizontal");
-        Vector2 playerVelocity = new Vector2((horizontalInput * speed) - scrollSpeed, rb.velocity.y);
-        rb.velocity = playerVelocity;
+        if(gm.gameRun){
+            float horizontalInput = Input.GetAxis("Horizontal");
+            Vector2 playerVelocity = new Vector2((horizontalInput * speed) - scrollSpeed, rb.velocity.y);
+            rb.velocity = playerVelocity;
+        }
+
+        if (lm.lives == 0){
+            gm.gameRun = false;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -54,7 +66,8 @@ public class PlayerMovement : MonoBehaviour
         int enemyLayer = LayerMask.NameToLayer("Enemy");
         if (other.gameObject.layer == enemyLayer)
         {
-            Debug.Log("Ow");
+           lm.Remove();
+           Debug.Log("Lives: " + lm.lives);
         }
     }
 
