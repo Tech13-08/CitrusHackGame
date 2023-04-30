@@ -1,28 +1,42 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class LivesManager : MonoBehaviour
 {
-    public int lives = 3;
-    public List<Image> childObjects = new List<Image>();
+    public int lives = 3; // Set this to the maximum number of images you want to have
 
-    public void Remove(){
-        if (childObjects.Count > 0)
+    public int leaves = 0;
+    public int leavesToLife = 5;
+    public GameObject imagePrefab; // Set this to the prefab you want to use for the images
+    private List<GameObject> imageList = new List<GameObject>(); 
+
+    private Vector2 position = new Vector2(-80f, 0f);
+
+    private void Update()
+    {
+        // Check if the number of images in the list is greater than the maxImages
+        while (imageList.Count > lives)
         {
-            // Get the last child object in the list
-            Image lastChild = childObjects[childObjects.Count - 1];
-            
-            // Remove the last child object from the list
-            childObjects.Remove(lastChild);
-            
-            // Destroy the last child object
-            Destroy(lastChild.gameObject);
+            GameObject image = imageList[imageList.Count - 1];
+            imageList.RemoveAt(imageList.Count - 1);
+            position = position - new Vector2(80f, 0f);
+            Destroy(image);
+        }
+        while (imageList.Count < lives){
+            // Instantiate the new object at the calculated position
+            GameObject image = Instantiate(imagePrefab);
 
-            lives -= 1;
+            image.transform.SetParent(transform);
+            RectTransform rectTransform = image.GetComponent<RectTransform>();
+            rectTransform.anchoredPosition = position;
+
+            // Add the new object to the list and update the last object position
+            imageList.Add(image);
+            position = position + new Vector2(80f, 0f);
+        }
+        if(leaves >= leavesToLife){
+            lives += 1;
+            leaves -= leavesToLife;
         }
     }
-
 }
-
-
