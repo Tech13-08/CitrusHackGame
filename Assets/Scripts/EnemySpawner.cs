@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public GameManager gm;
     public GameObject enemyPrefab;
     public float spawnInterval;
     public float enemySpeed;
@@ -12,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        if (Time.time - lastSpawnTime > spawnInterval)
+        if (Time.time - lastSpawnTime > spawnInterval && gm.gameRun)
         {
             float randomY = Random.Range(0f, range);
             Vector3 spawnPosition = new Vector3(10f, randomY - 2.7f, 0f);

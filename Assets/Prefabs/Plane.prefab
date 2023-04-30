@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a032e2f5eef532c4fa54dc6df4066479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gm: {fileID: 2301650992910277523, guid: 470a9735335f5094da58a4db82c23d1b, type: 3}
   ScrollSpeed: 1
   offset: 0
 --- !u!114 &8100045622061210828
@@ -126,7 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f4f069e5527914d99119519d0fb0d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 0}
+  gm: {fileID: 2301650992910277523, guid: 470a9735335f5094da58a4db82c23d1b, type: 3}
+  enemyPrefab: {fileID: 4891049373714372771, guid: e6d3bea5a4b0d6a44904d717090660c0, type: 3}
   spawnInterval: 5
   enemySpeed: 2
   range: 1.5
