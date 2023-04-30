@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     public GameManager gm;
     public Animator animator;
 
+    private SpriteRenderer sr => GetComponent<SpriteRenderer>();
+
     // Start is called before the first frame update
     private Rigidbody2D rb => GetComponent<Rigidbody2D>();
 
@@ -22,6 +24,17 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded = false;
 
     [SerializeField] float scrollSpeed = 1f;
+
+    private float damagedStartTime;
+    private bool damaged = false;
+
+    public Color damagedRed;
+
+    public float knockbackDistance = 1.0f;
+
+    bool canCollide = true;
+    float cooldownDuration = 0.5f;
+    float cooldownTimer = 0f;
 
     private void Update(){
         if(gm.gameRun){
@@ -41,6 +54,14 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
             animator.SetBool("jump", !isGrounded);
+            if (!canCollide)
+            {
+                cooldownTimer -= Time.deltaTime;
+                if (cooldownTimer <= 0f)
+                {
+                    canCollide = true;
+                }
+            }
         }
         }
 
@@ -60,6 +81,10 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("dead", true);
             rb.velocity = Vector3.zero;
         }
+        if(damaged && (Time.time - damagedStartTime >= 0.2f)){
+            damaged = false;
+            sr.color = Color.white;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -71,9 +96,29 @@ public class PlayerMovement : MonoBehaviour
         }
 
         int enemyLayer = LayerMask.NameToLayer("Enemy");
-        if (other.gameObject.layer == enemyLayer)
+        if (other.gameObject.layer == enemyLayer && canCollide)
         {
-            lm.Remove();
+            lm.lives -= 1;
+            sr.color = damagedRed;
+            damaged = true;
+            damagedStartTime = Time.time;
+            Vector3 knockbackDirection = transform.position - other.transform.position;
+
+            // Normalize the direction vector and multiply by a force value
+            knockbackDirection.Normalize();
+            
+            
+            // Move the player back along the knockback direction
+            transform.position += knockbackDirection * knockbackDistance;
+            canCollide = false;
+            cooldownTimer = cooldownDuration;
+        }
+
+        int leafLayer = LayerMask.NameToLayer("Leaf");
+        if (other.gameObject.layer == leafLayer)
+        {
+            lm.leaves += 1;
+            Destroy(other.gameObject);
         }
     }
 
@@ -90,6 +135,13 @@ public class PlayerMovement : MonoBehaviour
         int enemyLayer = LayerMask.NameToLayer("Enemy");
         if (other.gameObject.layer == enemyLayer)
         {
+            Destroy(other.gameObject);
+        }
+
+        int leafLayer = LayerMask.NameToLayer("Leaf");
+        if (other.gameObject.layer == leafLayer)
+        {
+            lm.leaves += 1;
             Destroy(other.gameObject);
         }
     }
