@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public LivesManager lm;
     public GameManager gm;
+
+    public Ground gr;
     public Animator animator;
 
     private SpriteRenderer sr => GetComponent<SpriteRenderer>();
@@ -38,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update(){
         if(gm.gameRun){
-            if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.velocity.y) < 0.001f && isGrounded)
+            if (Input.GetButtonDown("Jump") && isGrounded)
             {
                 jumpStartTime = Time.time;
                 startJump = true;
@@ -119,6 +121,9 @@ public class PlayerMovement : MonoBehaviour
         {
             lm.leaves += 1;
             Destroy(other.gameObject);
+
+            gr.raiseIceTime += 2f;
+            
         }
     }
 
@@ -143,6 +148,8 @@ public class PlayerMovement : MonoBehaviour
         {
             lm.leaves += 1;
             Destroy(other.gameObject);
+
+            gr.raiseIceTime += 2f;
         }
     }
 
