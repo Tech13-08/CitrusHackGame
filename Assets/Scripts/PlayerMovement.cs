@@ -140,6 +140,8 @@ public class PlayerMovement : MonoBehaviour
         int enemyLayer = LayerMask.NameToLayer("Enemy");
         if (other.gameObject.layer == enemyLayer)
         {
+            lm.score += 100;
+            lm.info.text += "\n+100";
             Destroy(other.gameObject);
         }
 

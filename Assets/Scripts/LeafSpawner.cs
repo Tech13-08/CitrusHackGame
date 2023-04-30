@@ -18,15 +18,16 @@ public class LeafSpawner : MonoBehaviour
     {
         if (Time.time - lastSpawnTime > spawnInterval && gm.gameRun)
         {
+            spawnInterval *= 0.95f;
             float randomY = Random.Range(rangeMin, rangeMax);
             Vector3 spawnPosition = new Vector3(10f, randomY - 2.7f, 0f);
             GameObject leaf = Instantiate(leafPrefab, spawnPosition, Quaternion.identity);
             Rigidbody2D leafRigidbody = leaf.GetComponent<Rigidbody2D>();
-            leafRigidbody.velocity = Vector2.left * leafSpeed;
+            leafRigidbody.velocity = Vector2.left * (leafSpeed * gm.speed);
             lastSpawnTime = Time.time;
 
-            rangeMax = gr.rb.position.y + 4.876f + 1f;
-            rangeMin = gr.rb.position.y + 4.876f + 0.5f;
+            rangeMax = gr.rb.position.y + 4.876f + 1.6f;
+            rangeMin = gr.rb.position.y + 4.876f + 0.8f;
         }
     }
 }
