@@ -12,7 +12,7 @@ public class LivesManager : MonoBehaviour
 
     private Vector2 position = new Vector2(-80f, 0f);
 
-    private void Update()
+    private void FixedUpdate()
     {
         // Check if the number of images in the list is greater than the maxImages
         while (imageList.Count > lives)
