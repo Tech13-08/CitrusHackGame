@@ -1,3 +1,4 @@
+using TMPro;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,11 +7,15 @@ public class LivesManager : MonoBehaviour
     public int lives = 3; // Set this to the maximum number of images you want to have
 
     public int leaves = 0;
+
+    public float score = 0;
     public int leavesToLife = 5;
     public GameObject imagePrefab; // Set this to the prefab you want to use for the images
     private List<GameObject> imageList = new List<GameObject>(); 
 
     private Vector2 position = new Vector2(-80f, 0f);
+
+    public TextMeshProUGUI info;
 
     private void FixedUpdate()
     {
@@ -38,5 +43,10 @@ public class LivesManager : MonoBehaviour
             lives += 1;
             leaves -= leavesToLife;
         }
+        if(lives > 0){
+            score += 0.1f;
+        }
+
+        info.text = "Score: " + Mathf.RoundToInt(score) + "\nLeaves: " + leaves;
     }
 }

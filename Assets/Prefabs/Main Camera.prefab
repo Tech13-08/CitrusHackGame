@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6258356709035168954
+--- !u!1 &514990169632330245
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6258356709035168838}
-  - component: {fileID: 6258356709035168953}
-  - component: {fileID: 6258356709035168955}
-  - component: {fileID: 6258356709035168839}
+  - component: {fileID: 514990169632330489}
+  - component: {fileID: 514990169632330246}
+  - component: {fileID: 514990169632330244}
+  - component: {fileID: 514990169632330488}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -19,13 +19,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6258356709035168838
+--- !u!4 &514990169632330489
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6258356709035168954}
+  m_GameObject: {fileID: 514990169632330245}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -34,13 +34,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &6258356709035168953
+--- !u!20 &514990169632330246
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6258356709035168954}
+  m_GameObject: {fileID: 514990169632330245}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
@@ -77,21 +77,21 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &6258356709035168955
+--- !u!81 &514990169632330244
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6258356709035168954}
+  m_GameObject: {fileID: 514990169632330245}
   m_Enabled: 1
---- !u!68 &6258356709035168839
+--- !u!68 &514990169632330488
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6258356709035168954}
+  m_GameObject: {fileID: 514990169632330245}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -101,7 +101,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -9.989823, y: -3.0923536}
+  - {x: -9.241702, y: -3.3225443}
+  - {x: -9.949203, y: -3.3414428}
   - {x: -10.113439, y: 4.9644747}
   - {x: 8.90197, y: 4.917586}
   - {x: 10.658083, y: 4.918086}

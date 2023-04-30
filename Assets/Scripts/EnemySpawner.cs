@@ -18,11 +18,12 @@ public class EnemySpawner : MonoBehaviour
     {
         if (Time.time - lastSpawnTime > spawnInterval && gm.gameRun)
         {
+            spawnInterval *= 0.95f;
             float randomY = Random.Range(rangeMin, rangeMax);
             Vector3 spawnPosition = new Vector3(10f, randomY - 2.7f, 0f);
             GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
             Rigidbody2D enemyRigidbody = enemy.GetComponent<Rigidbody2D>();
-            enemyRigidbody.velocity = Vector2.left * (enemySpeed);
+            enemyRigidbody.velocity = Vector2.left * (enemySpeed * gm.speed);
             lastSpawnTime = Time.time;
 
             rangeMax = gr.rb.position.y + 4.876f + 1f;

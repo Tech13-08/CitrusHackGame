@@ -19,7 +19,7 @@ public class Background : MonoBehaviour
     void Update()
     {
         if(gm.gameRun){
-            offset = offset + (Time.deltaTime * ScrollSpeed) / 10f;
+            offset = offset + (Time.deltaTime * (ScrollSpeed*gm.speed)) / 10f;
             mat.SetTextureOffset("_MainTex", new Vector2(offset, 0));
         }
     }
